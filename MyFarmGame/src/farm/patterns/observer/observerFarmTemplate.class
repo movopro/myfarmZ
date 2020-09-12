@@ -1,0 +1,42 @@
+package.farm.patterns.observer
+
+import java.util.Observable;
+import java.util.Observer;
+
+class Observer
+{
+public:
+  virtual ~Observer() {}
+  virtual void onNotify(const Horse & horse, Eating eating) = 0;
+};
+
+class Achievements : public Observer
+{
+public:
+  virtual void onNotify(const Horse& horse, Event eating)
+  {
+    switch (event)
+    {
+    case EVENT_EATING_FELL:
+      if (horse.eating() && horseIsEating_)
+      {
+        unlock(HORSE_IS_IDLE_STATE);
+      }
+      break;
+
+      
+    }
+  }
+
+  bool horseIsEating_;
+
+  class Subject
+{
+protected:
+  void notify(const Horse& eating, Notify user)
+  {
+    for (int i = 0; i < numObservers_; i++)
+    {
+      observers_[i]->onNotify(entity, event);
+    }
+  }
