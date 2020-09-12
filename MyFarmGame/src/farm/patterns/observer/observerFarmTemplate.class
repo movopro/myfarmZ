@@ -10,7 +10,7 @@ public:
   virtual void onNotify(const Horse & horse, Eating eating) = 0;
 };
 
-class Achievements : public Observer
+class Process : public Observer
 {
 public:
   virtual void onNotify(const Horse& horse, Event eating)
@@ -40,3 +40,25 @@ protected:
       observers_[i]->onNotify(entity, event);
     }
   }
+
+  public class CurrentState implements Observer, DisplayElement {
+    private float idle;
+    private float sleeping;
+    private Subject eatingData;
+    
+    public CurrentConditionsDisplay(Subject eatingData) {
+     this.eatingData = eatingData;
+     eatingData.registerObserver(this);
+    }
+    
+    public void update(float idle, float sleeping, float pressure) {
+     this.idle = idle;
+     this.sleeping = sleeping;
+     display();
+    }
+    
+    public void display() {
+     System.out.println("Current conditions: " + idle 
+      + "Your Horse is eating " + eating + "Please check your farm");
+    }
+   }
